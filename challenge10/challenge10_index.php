@@ -19,10 +19,20 @@
                 <a class="nav-link " href="#">Acceuil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/challenge10_cart.php">Panier</a>
+                <a class="nav-link" href="/challenge10/challenge10_cart.php">Panier</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/challenge10_logout.php">Deconnection</a>
+                <a class="nav-link" href="/challenge10/challenge10_logout.php">Deconnection</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/challenge10/challenge10_login.php">
+                    <?php
+                        if(empty($_SESSION['login']))
+                        {
+                            echo "Connection";
+                        }
+                    ?>
+                </a>
             </li>
         </ul>
         <span class="navbar-text position-absolute top-0 end-0 px-1">
@@ -39,15 +49,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-4 d-flex flex-column">
-                <img src="/img_challenge10/livre1.jpg" >
-                <a class="btn btn-dark my-1 w-25 align-self-center" href="?addcart=Shakespeare Histoire II">Ajouter au Panier</a>
+                <img src="/challenge10/img_challenge10/Shakespeare Histoires II.jpg" >
+                <a class="btn btn-dark my-1 w-25 align-self-center" href="?addcart=Shakespeare Histoires II">Ajouter au Panier</a>
             </div>
             <div class="col-4 d-flex flex-column">
-                <img src="/img_challenge10/livre2.jpg" >
+                <img src="/challenge10/img_challenge10/Shakespeare Macbeth.jpg" >
                 <a class="btn btn-dark my-1 w-25 align-self-center" href="?addcart=Shakespeare Macbeth">Ajouter au Panier</a>
             </div>
             <div class="col-4 d-flex flex-column">
-                <img src="/img_challenge10/livre3.jpg" >
+                <img src="/challenge10/img_challenge10/Shakespeare Oeuvres Completes.jpg" >
                 <a class="btn btn-dark my-1 w-25 align-self-center" href="?addcart=Shakespeare Oeuvres Completes">Ajouter au Panier</a>
             </div>
         </div>
@@ -55,9 +65,11 @@
 </main>
 </body>
 </html>
-<?php 
-if(isset($_GET['addcart']))
-{
-    $_SESSION['panier'][] = $_GET['addcart'];
-}
+<?php
+    if(isset($_GET['addcart']))
+    {
+        $_SESSION['panier'][$_GET['addcart']][] = $_GET['addcart'];
+        header('refresh:0; url=challenge10_index.php');
+    }
+    echo var_dump($_GET);
 ?>        
